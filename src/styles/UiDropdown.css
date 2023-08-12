@@ -1,0 +1,28 @@
+ /* .uiDropdown{
+  width: 100%;
+    border: 1px solid #ececec;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .uiDropdown ul{
+    list-style: none;
+    padding: 10px 20px;
+    position: absolute;
+    top: 3rem;
+    border: 1px solid #ececec;  
+    border-radius: 0.5rem;
+    z-index: 1;
+  } */
+  
+  .show{
+    display:inline-block;
+  }
+  
+  .hide{
+    display:none;
+  }
