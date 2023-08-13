@@ -42,10 +42,27 @@ const Board = ({ groupedTickets, selectedGroup, selectedSort, users }) => {
           return <PiCellSignalHighFill className="text-body-tertiary" />;
         } else if (priority === 'Urgent') {
           return <HiExclamationTriangle className="text-body-tertiary" />;
+        }else if (priority === 0) {
+          return <BsThreeDots className="text-body-tertiary" />;
+        } else if (priority === 1) {
+          return <PiCellSignalLowFill className="text-body-tertiary" />;
+        } else if (priority === 2) {
+          return <PiCellSignalMediumFill className="text-body-tertiary" />;
+        } else if (priority === 3) {
+          return <PiCellSignalHighFill className="text-body-tertiary" />;
+        } else if (priority === 4) {
+          return <HiExclamationTriangle className="text-body-tertiary" />;
         }
         return null;
       };
-    const images = [p1, p2, p3, p4, p5]; // Add your image paths here
+      const mapPriorityToText = {
+        4: 'Urgent',
+        3: 'High',
+        2: 'Medium',
+        1: 'Low',
+        0: 'No Priority'
+      };
+    const images = [p1, p2, p3, p4, p5]; 
     const getRandomImage = () => {
         const randomIndex = Math.floor(Math.random() * images.length);
         return images[randomIndex];
@@ -58,7 +75,7 @@ const Board = ({ groupedTickets, selectedGroup, selectedSort, users }) => {
                         <h5>
                             <span className='pe-3'>
                                 {selectedGroup === 'status' && getStatusIcon(groupValue)}
-                                {selectedGroup === 'priority' && getPriorityIcon(groupValue)}
+                                {selectedGroup === 'priority' && getPriorityIcon(mapPriorityToText[groupValue])}
                                 {selectedGroup === 'userId' && (
                                     <>
                                         <img
@@ -88,6 +105,9 @@ const Board = ({ groupedTickets, selectedGroup, selectedSort, users }) => {
                             ticket={ticket}
                             users={users}
                             selectedGroup={selectedGroup}
+                            getPriorityIcon={getPriorityIcon}
+                            getStatusIcon={getStatusIcon}
+                            getRandomImage={getRandomImage}
                         />
                     ))}
                 </div>

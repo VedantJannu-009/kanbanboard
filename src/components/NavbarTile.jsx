@@ -5,6 +5,7 @@ import { LuSettings2 } from 'react-icons/lu'
 import 'react-dropdown/style.css';
 // import { useState } from 'react';
 import '../styles/NavbarTile.css';
+import UIdropdown from './UiDropdown';
 const NavbarTile = ({groupOptions,sortOptions,selectedGroup,setSelectedGroup,selectedSort,setSelectedSort}) => {
   return (
     <div>
@@ -14,40 +15,8 @@ const NavbarTile = ({groupOptions,sortOptions,selectedGroup,setSelectedGroup,sel
             <LuSettings2 /> <b>Display</b>
           </Dropdown.Toggle>
           <Dropdown.Menu className='dropMenu'>
-            <div className='d-flex justify-content-between align-items-center p-2 px-4 '>
-              <div>Grouping </div>
-              <div>
-                <select
-                className='px-3 p-1 rounded border border-dark-subtle'
-                  id="groupSelect"
-                  value={selectedGroup}
-                  onChange={(e) => setSelectedGroup(e.target.value)}
-                >
-                  {groupOptions.map(option => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className='d-flex justify-content-between align-items-center p-2 px-4'>
-              <div>Ordering </div>
-              <div>
-                <select
-                className='px-3 p-1 rounded border border-dark-subtle'
-                  id="sortSelect"
-                  value={selectedSort}
-                  onChange={(e) => setSelectedSort(e.target.value)}
-                >
-                  {sortOptions.map(option => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+            <UIdropdown entity={"Grouping"} selectedEntity={selectedGroup} setSelectEdentity={setSelectedGroup} entityOptions={groupOptions}/>
+            <UIdropdown entity={"Ordering"} selectedEntity={selectedSort} setSelectEdentity={setSelectedSort} entityOptions={sortOptions}/>
           </Dropdown.Menu>
         </Dropdown>
       </Container>

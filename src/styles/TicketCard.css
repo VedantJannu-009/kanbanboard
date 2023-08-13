@@ -1,5 +1,6 @@
 .ticket{
     width: 100%;
+    min-height: 130px;
     padding: 0.5rem 1rem;
     background-color: white;
     border-radius: 0.5rem;
@@ -12,9 +13,11 @@
     border-radius: 50%;
     object-fit: cover;
 }
-.ticket .ticketTitle{
-    width: 100%;
+ .ticketTitle{
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.4;
+    max-height: 2.8em;
 }

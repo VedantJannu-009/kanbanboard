@@ -1,18 +1,18 @@
 import React from 'react';
 import '../styles/UiDropdown.css';
 
-const UIdropdown = ({ options,text ,selectedOption,setSelectedOption}) => {
-  // const [selectedOption, setSelectedOption] = useState('title');
-
+const UIdropdown = ({ selectedEntity, setSelectEdentity, entityOptions, entity }) => {
   return (
-    <div className='d-flex justify-content-between align-items-center px-3'>
-      <div>{text}</div>
+    <div className='d-flex justify-content-between align-items-center p-2 px-4 '>
+      <div className='text-body-secondary'><b>{entity}</b> </div>
       <div>
         <select
-          value={selectedOption}
-          onChange={(e) => setSelectedOption(e.target.value)}
+          className='px-3 p-1 rounded border border-dark-subtle'
+          id="groupSelect"
+          value={selectedEntity}
+          onChange={(e) => setSelectEdentity(e.target.value)}
         >
-          {options.map(option => (
+          {entityOptions.map(option => (
             <option key={option} value={option}>
               {option}
             </option>
