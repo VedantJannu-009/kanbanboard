@@ -10,7 +10,7 @@ const NavbarTile = ({groupOptions,sortOptions,selectedGroup,setSelectedGroup,sel
   return (
     <div>
       <Container fluid className='p-3 bg-white border-bottom shadow-sm fixed-top'>
-        <Dropdown className='mx-5'>
+        <Dropdown>
           <Dropdown.Toggle className='bg-white border-white text-dark shadow-sm border-secondary-subtle' id="dropdown-basic">
             <LuSettings2 /> <b>Display</b>
           </Dropdown.Toggle>
