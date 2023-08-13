@@ -1,29 +1,5 @@
-// import React from 'react'
-// import {BsFillExclamationSquareFill,BsCircleFill} from 'react-icons/bs'
-// import img from '../assets/images/man.png';
-// import '../styles/TicketCard.css';
-// const TicketCard = ({ ticket }) => {
-//   return (
-//     <div className="ticket my-2">
-//       <div className='d-flex justify-content-between align-items-center'>
-//         <h5 className='text-body-tertiary'>{ticket.id}</h5>
-//         <div><img src={img} alt={"manimage"} /></div>
-//       </div>
-//       <div>
-//         <h5 className='ticketTitle'>{ticket.title}</h5>
-//       </div>
-//       <div className='d-flex justify-content-left align-items-center'>
-//         <div className='text-body-secondary p-1 border border-light-subtle rounded'><BsFillExclamationSquareFill/></div>
-//         <div className='p-1 border border-light-subtle rounded mx-2'><BsCircleFill className='text-body-tertiary mx-1'/>{ticket.tag}</div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default TicketCard;
 import React from 'react';
 import { BsCircleFill, BsThreeDots } from 'react-icons/bs';
-
 import { PiCellSignalHighFill, PiCellSignalMediumFill, PiCellSignalLowFill } from 'react-icons/pi'
 import { HiExclamationTriangle } from 'react-icons/hi2';
 import { TbCircleDotted } from 'react-icons/tb';
@@ -37,13 +13,14 @@ import p4 from '../assets/images/p4.jpg';
 import p5 from '../assets/images/p5.jpg';
 import '../styles/TicketCard.css';
 
-const TicketCard = ({ ticket }) => {
+const TicketCard = ({ ticket, selectedGroup }) => {
   const images = [p1, p2, p3, p4, p5];
   const getRandomImage = () => {
     const randomIndex = Math.floor(Math.random() * images.length);
     return images[randomIndex];
   };
   const ticketImage = getRandomImage();
+
   const getStatusIcon = (status) => {
     if (status === 'Todo') {
       return <TbCircleDotted className="text-danger" />;
@@ -76,41 +53,31 @@ const TicketCard = ({ ticket }) => {
 
   return (
     <div className="ticket my-2 d-flex justify-content-between align-items-start">
-      {/* <div className='d-flex justify-content-between align-items-center'>
-        <h6 className='text-body-tertiary'>{ticket.id}</h6>
-        <div><img src={ticketImage} alt={"manimage"} /></div>
-      </div>
       <div>
-        <h6 className='ticketTitle'>{getStatusIcon(ticket.status)}{" "}<b>{ticket.title}</b></h6>
-      </div>
-      <div className='d-flex justify-content-left align-items-center'>
-        <div className='text-body-secondary p-1 border border-light-subtle rounded'>
-          {getPriorityIcon(ticket.priority)}{" "}
-        </div>
-        <div className='d-flex justify-content-center align-items-center p-1 border border-light-subtle rounded mx-2'>
-          <div><BsCircleFill className='text-body-tertiary opacity-50'/></div>
-          <div>{ticket.tag}</div>
-        </div>
-      </div> */}
-      <div >
         <div><h6 className='text-body-tertiary'>{ticket.id}</h6></div>
         <div className='d-flex justify-content-between align-items-start'>
-          <div className='pe-2'>{getStatusIcon(ticket.status)}</div>
+          {selectedGroup !== 'status' && (
+            <div className='pe-2'>{getStatusIcon(ticket.status)}</div>
+          )}
           <div><h6><b>{ticket.title}</b></h6></div>
         </div>
         <div className='d-flex justify-content-left align-items-center'>
-          <div className='text-body-secondary p-1 border border-light-subtle rounded'>
-            {getPriorityIcon(ticket.priority)}{" "}
-          </div>
+          {selectedGroup !== 'priority' && (
+            <div className='text-body-secondary p-1 border border-light-subtle rounded'>
+              {getPriorityIcon(ticket.priority)}{" "}
+            </div>
+          )}
           <div className='d-flex justify-content-center align-items-center p-1 border border-light-subtle rounded mx-2'>
             <div><BsCircleFill className='text-body-tertiary opacity-50' /></div>
             <div>{ticket.tag}</div>
           </div>
         </div>
       </div>
-      <div>
-        <img src={ticketImage} alt={"manimage"} />
-      </div>
+      {selectedGroup !== 'userId' && (
+        <div>
+          <img src={ticketImage} alt={"manimage"} />
+        </div>
+      )}
     </div>
   );
 }
