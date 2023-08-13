@@ -5,8 +5,13 @@
 // import Board from './components/Board';
 
 // const App = () => {
-//   const [tickets, setTickets] = useState([]);
-//   const [users, setUsers] = useState([]);
+//   //constants 
+//   const groupOptions = ['status', 'userId', 'priority'];
+//   const sortOptions = ['title', 'priority'];
+//   const [appData, setAppData] = useState({
+//     tickets: [],
+//     users: []
+//   });
 //   const [selectedGroup, setSelectedGroup] = useState('status');
 //   const [selectedSort, setSelectedSort] = useState('title');
 //   const url = 'https://apimocha.com/quicksell/data';
@@ -15,28 +20,16 @@
 //     fetch(url)
 //       .then(response => response.json())
 //       .then(data => {
-//         setTickets(data.tickets);
-//         setUsers(data.users);
+//         setAppData(data);
 //       })
 //       .catch(error => console.error('Error fetching data:', error));
 //   }, []);
 
-//   const groupOptions = ['status', 'userId', 'priority'];
-//   const sortOptions = ['title', 'priority'];
-
-//   const mapPriorityToText = {
-//     4: 'Urgent',
-//     3: 'High',
-//     2: 'Medium',
-//     1: 'Low',
-//     0: 'No Priority'
-//   };
-
-//   const groupedTickets = tickets.reduce((groups, ticket) => {
+//   const groupedTickets = appData.tickets.reduce((groups, ticket) => {
 //     const groupValue = selectedGroup === 'priority'
-//       ? mapPriorityToText[ticket.priority]
+//       ? ticket.priority
 //       : (selectedGroup === 'userId'
-//         ? users.find(user => user.id === ticket.userId)?.name
+//         ? appData.users.find(user => user.id === ticket.userId)?.name
 //         : ticket[selectedGroup]);
 //     if (!groups[groupValue]) {
 //       groups[groupValue] = [];
@@ -55,7 +48,7 @@
 //         setSelectedSort={setSelectedSort}
 //         selectedSort={selectedSort}
 //       />
-//       <Board groupedTickets={groupedTickets} selectedGroup={selectedGroup} selectedSort={selectedSort} users={users} />
+//       <Board groupedTickets={groupedTickets} selectedGroup={selectedGroup} selectedSort={selectedSort} users={appData.users} />
 //     </div>
 //   );
 // }
@@ -69,15 +62,17 @@ import { useEffect, useState } from 'react';
 import Board from './components/Board';
 
 const App = () => {
-  //constants 
   const groupOptions = ['status', 'userId', 'priority'];
   const sortOptions = ['title', 'priority'];
+  
   const [appData, setAppData] = useState({
     tickets: [],
     users: []
   });
-  const [selectedGroup, setSelectedGroup] = useState('status');
-  const [selectedSort, setSelectedSort] = useState('title');
+
+  // Retrieve the selectedGroup from localStorage if available, otherwise default to 'status'
+  const [selectedGroup, setSelectedGroup] = useState(localStorage.getItem('selectedGroup') || 'status');
+  const [selectedSort, setSelectedSort] = useState(localStorage.getItem('selectedSort') ||'title');
   const url = 'https://apimocha.com/quicksell/data';
 
   useEffect(() => {
@@ -88,6 +83,12 @@ const App = () => {
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
+
+  // Update the selectedGroup in localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('selectedGroup', selectedGroup);
+    localStorage.setItem('selectedSort', selectedSort);
+  }, [selectedGroup,selectedSort]);
 
   const groupedTickets = appData.tickets.reduce((groups, ticket) => {
     const groupValue = selectedGroup === 'priority'

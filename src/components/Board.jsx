@@ -87,7 +87,7 @@ const Board = ({ groupedTickets, selectedGroup, selectedSort, users }) => {
                                 )}
                             </span>
                             <b>
-                                {groupValue}
+                            {selectedGroup === 'priority' ? mapPriorityToText[groupValue] : groupValue}
                             </b>
                             <span className='text-body-tertiary ps-3'>{groupedTickets[groupValue].length}</span>
                         </h5>

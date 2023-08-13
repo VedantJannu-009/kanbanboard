@@ -12,3 +12,9 @@
     max-width: 350px;
     height: 100%;
 }
+
+@media only screen and (max-width: 600px) {
+    .board-container{
+        grid-template-columns: repeat(1, 1fr);
+    }
+  }
