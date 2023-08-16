@@ -15,7 +15,7 @@ const App = () => {
 
   const [selectedGroup, setSelectedGroup] = useState(localStorage.getItem('selectedGroup') || 'status');
   const [selectedSort, setSelectedSort] = useState(localStorage.getItem('selectedSort') ||'title');
-  const url = 'https://apimocha.com/quicksell/data';
+  const url = 'https://api.quicksell.co/v1/internal/frontend-assignment';
 
   useEffect(() => {
     fetch(url)
